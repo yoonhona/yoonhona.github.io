@@ -1,0 +1,15 @@
+{
+  "name": "yoonhona.github.io",
+  "version": "0.0.1",
+  "description": "blog",
+  "main": "",
+  "repository": "https://github.com/yoonhona/yoonhona.github.io.git",
+  "author": "yoonhona <lucky72nyh@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "dev": "vuepress dev docs",
+    "build": "vuepress build docs",
+    "deploy": "./deploy.sh"
+  }
+}
