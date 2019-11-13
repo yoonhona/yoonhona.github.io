@@ -12,10 +12,12 @@
     "build": "vuepress build docs",
     "deploy": "./deploy.sh"
   },
-  "dependencies": {
-    "markdown-it-codesandbox": "^1.0.1",
-    "@vuepress/plugin-back-to-top": "^1.0.0-rc.1",
-    "@vuepress/plugin-google-analytics": "^1.1.0",
-    "@vuepress/plugin-nprogress": "^1.0.0-rc.1"
+  "devDependencies": {
+    "@vuepress/plugin-blog": "^1.5.1",
+    "@vuepress/plugin-google-analytics": "^1.2.0",
+    "@vuepress/plugin-last-updated": "^1.2.0",
+    "@vuepress/plugin-medium-zoom": "^1.2.0",
+    "vuepress": "^1.2.0",
+    "vuepress-theme-meteorlxy": "^1.7.1"
   }
 }
