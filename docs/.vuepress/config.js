@@ -11,7 +11,10 @@ module.exports = {
 
   markdown   : {
     lineNumbers: true,
-  },
+    extendMarkdown: md => {
+      md.use(require('markdown-it-plantuml'))
+    }
+    },
   plugins    : [
     [
       '@vuepress/google-analytics',
@@ -27,6 +30,7 @@ module.exports = {
     nav: [
       { text: 'Home', link: '/', exact: true },
       { text: 'Post', link: '/posts/' },
+      { text: 'Books', link: '/bookLayout/' },
       { text: 'Github', link: 'https://github.com/yoonhona' },
     ],
 
