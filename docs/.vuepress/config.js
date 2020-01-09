@@ -27,6 +27,7 @@ module.exports = {
     nav: [
       { text: 'Home', link: '/', exact: true },
       { text: 'Post', link: '/posts/' },
+      { text: 'Book Timeline', link: '/bookLayout/' },
       { text: 'Github', link: 'https://github.com/yoonhona' },
     ],
 

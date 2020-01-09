@@ -17,6 +17,7 @@
     "@vuepress/plugin-google-analytics": "^1.2.0",
     "@vuepress/plugin-last-updated": "^1.2.0",
     "@vuepress/plugin-medium-zoom": "^1.2.0",
+    "vue-cute-timeline": "^1.2.8",
     "vuepress": "^1.2.0",
     "vuepress-theme-meteorlxy": "^1.7.1"
   }
