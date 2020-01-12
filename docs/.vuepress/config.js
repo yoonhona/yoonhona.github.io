@@ -9,23 +9,37 @@ module.exports = {
   // Theme to use
   theme: 'meteorlxy',
 
-  markdown   : {
-    lineNumbers: true,
-    extendMarkdown: md => {
-      md.use(require('markdown-it-plantuml'))
-    }
+  markdown: {
+    lineNumbers   : true,
+    toc: {
+      includeLevel: [1, 5],
     },
-  plugins    : [
+    extendMarkdown: md => {
+
+      md.use(require('markdown-it-plantuml'))
+      md.use(require('markdown-it-multimd-table'), {
+        multiline: true,
+        rowspan: true,
+        headerless: true,
+      })
+    },
+  },
+
+  plugins: [
     [
       '@vuepress/google-analytics',
       {
         'ga': 'UA-89927984-1',
       },
-    ]
+    ],
   ],
+
   themeConfig: {
+
     // Language of this theme. See the [Theme Language] section below.
-    lang: 'en-US',
+    lang: Object.assign(require('vuepress-theme-meteorlxy/lib/langs/en-US'), {
+      toc: '목차',
+    }),
 
     nav: [
       { text: 'Home', link: '/', exact: true },
@@ -64,12 +78,13 @@ module.exports = {
       },
 
     },
+
     comments: {
-      platform: 'github', // Optional, default is 'github'. You can also choose 'gitlab', 'bitbucket'. Check Vssue docs for details.
-      owner: 'yoonhona',
-      repo: 'yoonhona.github.io',
-      clientId: 'f2e448856c71b633ac89',
-      clientSecret: 'd0ac690efb0800532a3ce2825b59a9497f7d7878',
+      platform       : 'github', // Optional, default is 'github'. You can also choose 'gitlab', 'bitbucket'. Check Vssue docs for details.
+      owner          : 'yoonhona',
+      repo           : 'yoonhona.github.io',
+      clientId       : 'f2e448856c71b633ac89',
+      clientSecret   : 'd0ac690efb0800532a3ce2825b59a9497f7d7878',
       autoCreateIssue: process.env.NODE_ENV !== 'development', // Optional, this will not create issue autoly in development mode
     },
 
