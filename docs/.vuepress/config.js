@@ -44,7 +44,6 @@ module.exports = {
     nav: [
       { text: 'Home', link: '/', exact: true },
       { text: 'Post', link: '/posts/' },
-      { text: 'Books', link: '/bookLayout/' },
       { text: 'Github', link: 'https://github.com/yoonhona' },
     ],
 
@@ -55,7 +54,7 @@ module.exports = {
       // Nickname
       nickname   : '생계형 🐾者',
       // Introduction of yourself (HTML supported)
-      description: '생계형 개발자의 블로그입니다. <br />생업에서 취득한 내옹을 공유합니다.',
+      description: '생계형 개발자의 블로그입니다. <br />생업에서 취득한 내용을 공유합니다.',
 
       // Email
       email: 'lucky7_nyh@naver.com',
