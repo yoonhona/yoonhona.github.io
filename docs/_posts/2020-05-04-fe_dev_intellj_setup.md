@@ -1,10 +1,10 @@
 ---
-title: 어떤 프론트엔드 개발자의 Intellij 사용법 - 나는 왜 Intellij IDEA를 사용하는가
+title: 어떤 FE 개발자의 Intellij 사용법 - 나는 왜 Intellij IDEA를 사용하는가
 date: 2020-05-04
 category: Tool
 tags:
 - Intellij IDEA
-- 개발 툴  
+- 개발 툴
 vssue: true
 ---
 

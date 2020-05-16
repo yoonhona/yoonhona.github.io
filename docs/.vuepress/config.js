@@ -10,7 +10,7 @@ module.exports = {
   theme: 'meteorlxy',
 
   markdown: {
-    lineNumbers   : true,
+    lineNumbers   : false,
     toc: {
       includeLevel: [1, 5],
     },
@@ -32,7 +32,13 @@ module.exports = {
         'ga': 'UA-89927984-1',
       },
     ],
+    ['container', {
+      type: 'details',
+      before: info => `<details class="custom-block details">${info ? `<summary>${info}</summary>` : ''}\n`,
+      after: () => '</details>\n'
+    }],
   ],
+
 
   themeConfig: {
 
