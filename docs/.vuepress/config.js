@@ -11,17 +11,18 @@ module.exports = {
 
   markdown: {
     lineNumbers   : false,
-    toc: {
+    toc           : {
       includeLevel: [1, 5],
     },
     extendMarkdown: md => {
 
       md.use(require('markdown-it-plantuml'))
       md.use(require('markdown-it-multimd-table'), {
-        multiline: true,
-        rowspan: true,
+        multiline : true,
+        rowspan   : true,
         headerless: true,
       })
+      md.use(require('markdown-it-sup'))
     },
   },
 
@@ -32,13 +33,13 @@ module.exports = {
         'ga': 'UA-89927984-1',
       },
     ],
-    ['container', {
-      type: 'details',
+    [
+      'container', {
+      type  : 'details',
       before: info => `<details class="custom-block details">${info ? `<summary>${info}</summary>` : ''}\n`,
-      after: () => '</details>\n'
+      after : () => '</details>\n',
     }],
   ],
-
 
   themeConfig: {
 
