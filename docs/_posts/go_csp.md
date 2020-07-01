@@ -7,7 +7,7 @@ tags:
   - CSP
   - Concurrency
 vssue: true
-draft: true
+draft: false
 ---
 ::: tip 이 글은  
 [Concurrency in Go - Go 동시성 프로그램](http://acornpub.co.kr/book/concurrency-in-go)
@@ -78,11 +78,10 @@ draft: true
 
 Go는 CSP에서 몇가지 개념을 채용하여 채널^channel^을 사용하는 새로운 기본요소를
 도입하였고  
-스레드는 여전히 존재하지만 **고루틴과 채널에서** 모든 것을 모델링하며
-**메모리를 공유**한다.
+스레드는 여전히 존재하지만 **고루틴과 채널에서** 모든 것을 모델링하며 **메모리를
+공유**한다.
 
 ## CSP란 무엇인가?
-
 CSP는 상호작용하는 순차적 프로세스들^Communicating^ ^Sequential^
 ^Processes^의 약자로  
 1978년 찰스 안토니 리차드 호어^Chanrles^ ^Antony^ ^Richard^ ^Hoare^가 미국
@@ -116,14 +115,12 @@ CSP는 상호작용하는 순차적 프로세스들^Communicating^ ^Sequential^
 동시성이 Go의 강점 중 하나로 간주되는 이유가 바로 이것이다.  
 처음부터 CSP의 원칙을 염두에 두고 구축됐으므로 읽고 쓰기 쉽고, 추록하기 쉽다.
 
-::: tip first class citizen
+[프로세스간 채널을 사용한 통신 이미지](http://arild.github.io/csp-presentation/#11)
 
+::: tip first class citizen  
 함수에 전달되고, 함수로부터 반환되고, 변수에 할당될 수 있는 값
 
 :::
-
-[프로세스간 채널을 사용한 통신 이미지](http://arild.github.io/csp-presentation/#11)
-
 
 ## 동시성을 지원하는 언어의 장점
 
@@ -141,7 +138,7 @@ Go는 다른 방식을 사용해 고루틴 및 채널의 개념으로 이를 대
 3. 이 운영체제의 스레드는 얼마나 무거운가?  
 ...
 
-[자바 동시성 코드 리뷰 점검표](https://github.com/code-review-checklists/java-concurrency)
+[스레드를 지원하는 자바에서 동시성 코드에 대한 체크리스트](https://github.com/code-review-checklists/java-concurrency)
 
 실질적인 문제 해결보다는 병령성 문제를 해결하기 위해 생각해야 할 것이 많다.  
 해당 언어에서 병렬성과 관련하여 추상화할 수 있는 프레임워크가 존재한다고 해서,  
@@ -162,6 +159,66 @@ Go에서라면 들어오는 연결마다 고루틴을 만들고, .....
 이렇듯 CSP에서 영감을 얻은 기본요소들과 이를 지원하는 런타임의 화려한 조합이 Go에
 강력한 힘을 선사한다.
 
-## Go의 동시성의 철학
+## Go의 동시성에 대한 철학
+
+Go에서 CSP 스타일로만 동시성 코드를 작성할 수 있는 것은 아니다.  
+메모리 접근 동기화를 비롯한 여러가지 전통적인 방법을 지원한다.
+
+**메모리 공유를 사용해 통신하지 마라. 대신 통신을 통해 메모리를 공유하라**  
+하지만 Go 팀에서는 CSP 스타일의 사용을 권하고 있다.
+
+그러면 어느 방법을 사용해야 할까?
+
+@startuml
+hide empty description
+skinparam monochrome true
+
+state "기본 요소 사용" as step5  
+state "4) 성능상의 임계 영역인가?" as step1  
+state "1) 데이터의 소유권을 \n 이전하려고 하는가?" as step2  
+state "2) 구조체의 내부 상태를 \n 보호하려고 하는가?" as step3  
+state "3) 여러 부분의 논리를 \n 조정해야 하는가?" as step4
+state "채널 사용" as step6
+
+step1 --> step5: Yes  
+step3 --> step5: Yes  
+step4 --> step5: No
+
+step1 --> step2: No  
+step2 --> step3: No  
+step3 --> step4: No
+
+step2 --> step6: yes  
+step4 --> step6: yes
+
+@enduml
+
+1. 데이터의 소유권을 이전하려고 하는가?  
+   채널은 한번에 하나의 동시 컨텐스트만 데이터 소유권을 가져야 한다는 의도를
+   채널의 타입에 인코딩함으로써 메모리 소유권 개념을 전달할 수 있게 도와준다.  
+   이 방식의 가장 큰 장점은 적은 비용으로 메모니 내부 큐^in-memory^ ^queue^를
+   위한 버퍼링된 채널을 생성하고, 이를 통해 생산자와 소비자를 분리할 수 있고,
+   동시성 코드를 다른 동시성 코드와 함께 구성할 수 있다.
+2. 구조체의 내부 상태를 보호하고자 하는가?  
+   메모리 접근 동기화 기본 요소를 사용할 수 있는 훌륭한 후보이자 채널을
+   사용해서는 안된다는 강력한 지표  
+   메모리 접근 동기화를 통해 호출자에게 임계영역을 잠그는 세부사항을 노출하지 않을
+   수 있다.
+3. 여러 부분의 논리를 조정해야 하는가?  
+   채널은 본질적으로 메모리 접근 동기화 기본 요소보다 더 쉽게 구성 가능하고
+   복잡성을 쉽게 제어할 수 있다.
+4. 성능상의 임계 영역(performance-critical section)인가?  
+   특정 영역이 다른 부분보다 느린 병목지점으로 밝혀지면 메모리 접근 동기화
+   기본요소를 사용하자.  
+   채널이 동작할 때 메모리 접근 동기화를 사용하기 때문에 채널이 더 늘릴 수 있기
+   때문이다.
+
+::: tip 동시성에 대한 Go의 철학을 요약하면
+
+단순화를 목표로 하고,  
+가능하면 채널을 사용하며,  
+고루틴을 무한정 쓸 수 있는 자원처럼 다루어라
+
+:::
 
 
