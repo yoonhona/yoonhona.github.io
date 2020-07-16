@@ -46,10 +46,9 @@ module.exports = {
       {
         base_url: '/', // required
         site_url: 'https://yoonhona.github.io', // required
-        // filter some post
-        filter: (frontmatter) => { return [true|false] },
-        // How much articles
-        count: 20
+        count: 20,
+        copyright: '2020 NYH',
+        language: 'ko'
       }
     ]
 
