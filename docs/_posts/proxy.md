@@ -6,7 +6,8 @@ tags:
   - proxy
   - nginx
 vssue: true
-draft: true
+draft: false
+type: post
 ---
 
 ::: tip 이 글은
@@ -19,9 +20,9 @@ HTTP 완벽 가이드 6장
 
 ## 한마디로 "중개자"
 
-Proxy 서버는 클라이언트에서 요청을 받아 서버에 보내주고, 서버의 응답을 받아 클라이언트에 돌려준다.    
+Proxy 서버는 클라이언트에서 요청을 받아 서버에 보내주고, 서버의 응답을 받아 클라이언트에 돌려준다.  
 그렇기에 Proxy 서버는 웹 서버이자 웹 클라이언트이다.  
-클라이언트 입장에서는 HTTP Request를 보내는 웹 서버이고, 서버 입장에서는 요청을 받아 처리 후 HTTP Response를 보내는 웹 클라이언트이다.  
+클라이언트 입장에서는 HTTP Request를 보내는 웹 서버이고, 서버 입장에서는 요청을 받아 처리 후 HTTP Response를 보내는 웹 클라이언트이다.
 
 ## 등장 배경
 
@@ -106,7 +107,7 @@ HTML, 이미지 등의 정적 자원 캐싱하여 백 엔드의 부하를 줄이
 이를 프록시 서버에서 대신하여 처리
 
 ### SSL 가속
- 
+
 [SSL 핸드세이크](https://www.cloudflare.com/learning/ssl/what-happens-in-a-tls-handshake/)을 대신하여 애플리케이션 서버의 CPU의 부하를 낮춤
 
 ### 싱글 사인온

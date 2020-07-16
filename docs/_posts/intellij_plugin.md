@@ -8,6 +8,7 @@ tags:
   - 플러그인
 vssue: true
 draft: false
+type: post
 ---
 
 ## [Material Theme UI](https://plugins.jetbrains.com/plugin/8006-material-theme-ui)

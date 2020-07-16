@@ -1,4 +1,6 @@
 module.exports = {
+  title: '생계형 🐾者',
+  description: '생계형 개발자의 블로그입니다.<br />프론트 엔드 개발을 하며<br /> React.js를 다룹니다.',
   // Language of your website
   locales: {
     '/': {
@@ -39,6 +41,18 @@ module.exports = {
       before: info => `<details class="custom-block details">${info ? `<summary>${info}</summary>` : ''}\n`,
       after : () => '</details>\n',
     }],
+
+    ['vuepress-plugin-rss',
+      {
+        base_url: '/', // required
+        site_url: 'https://yoonhona.github.io', // required
+        // filter some post
+        filter: (frontmatter) => { return [true|false] },
+        // How much articles
+        count: 20
+      }
+    ]
+
   ],
 
   themeConfig: {

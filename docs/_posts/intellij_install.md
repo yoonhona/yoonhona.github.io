@@ -7,6 +7,7 @@ tags:
   - 개발 툴
   - Toolbox
 vssue: true
+type: post
 ---
 ::: tip 이 글은  
 macOS, Intellij 2020.1.1에서 작성되었습니다.  

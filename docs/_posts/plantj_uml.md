@@ -6,6 +6,7 @@ tags:
   - UML
   - 요구사항
 vssue: true
+type: post
 ---
 
 > 다이어그램을 UI 툴이 아닌 코드로 작성하는 환경에 대해 알아봅니다.  

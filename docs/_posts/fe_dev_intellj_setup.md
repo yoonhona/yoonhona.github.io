@@ -6,6 +6,7 @@ tags:
 - Intellij IDEA
 - 개발 툴
 vssue: true
+type: post
 ---
 
 ::: tip 이 글은  

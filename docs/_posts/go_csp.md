@@ -8,6 +8,7 @@ tags:
   - Concurrency
 vssue: true
 draft: false
+type: post
 ---
 ::: tip 이 글은  
 [Concurrency in Go - Go 동시성 프로그램](http://acornpub.co.kr/book/concurrency-in-go)
