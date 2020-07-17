@@ -24,7 +24,7 @@ draft: true
 
 ## 이식성
 
-![](https://www.docker.com/sites/default/files/d8/styles/large/public/2018-11/Docker-Website-2018-Diagrams-071918-V5_26_Docker-today.png?itok=-N_HRaz2)
+![](https://www.docker.com/sites/default/files/d8/styles/large/public/2018-11/Docker-Website-2018-Diagrams-071918-V5_26_Docker-today.png)
 
 도커가 설치되어 있는 어디서나 운영이 가능
 - 리눅스, 윈도우, 클라우드 등 도커가 실행 가능한 환경에서서 운영이 가능
@@ -37,8 +37,9 @@ draft: true
 
 - 업계 표준
   - 도커는 2013년에 오픈소스로 시작되어 많이 사용되고 있다. 도커를 통해 컨테이너
-    기술이 부상하면서 2015년 컨테이너 표준인 OCI(Open Container
-    Initiative)에 CoreOS(RedHat) 등과 함께 시작
+    기술이 부상하면서 2015년 컨테이너 표준인
+    [OCI](https://opencontainers.org/) (Open Container Initiative)을
+    CoreOS(RedHat) 등과 함께 시작
   - [containerd](https://containerd.io/)라는 컨테이너 런타임 표준을 제작하여
     컨테이너 산업에서 사실상 표준
 
