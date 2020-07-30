@@ -12,7 +12,7 @@ module.exports = {
   theme: 'meteorlxy',
 
   markdown: {
-    lineNumbers   : false,
+    lineNumbers   : true,
     toc           : {
       includeLevel: [1, 5],
     },
