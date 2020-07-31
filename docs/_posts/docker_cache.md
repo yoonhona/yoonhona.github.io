@@ -36,6 +36,7 @@ CRA 문서에 따라 my-app이라는 폴더에 설치 후 만들어진 프로젝
 `머 이정도야` 일단 한번 도커를 사용하여 빌드하여 이미지를 만들어보자.
 
 ```nginx
+# nginx.conf
 server {
 	listen 80;
 
@@ -63,7 +64,7 @@ FROM nginx:alpine
 
 # 만들어 놓은 nginx 설정 파일과 위에서 빌드한 결과물을 복사한다. 
 COPY ./nginx.conf /etc/nginx/conf.d
-COPY --from=buildstep /app/build /usr/share/nginx/html
+COPY --from=build /app/build /usr/share/nginx/html
 
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
@@ -98,6 +99,7 @@ build
 ```
 ```bash
 DOCKER_BUILDKIT=1 docker build .
+# 실행 결과
 [+] Building 99.1s (14/14) FINISHED
  ...
  => [internal] load build context      0.0s
@@ -131,4 +133,118 @@ DOCKER_BUILDKIT=1 docker build .
 [`multi-stage builds`](https://docs.docker.com/develop/develop-images/multistage-build/)를
 사용하려 한다.
 
+일단 의존성 cache를 위한 부분을 수정해보자.
+```dockerfile
+FROM node:alpine as dependences
+# /app 디렉토리 생성 후 프로젝트 폴더를 /app 복사한다.
+WORKDIR /app
+COPY package.json /app/
+# 의존성 설치
+RUN yarn
+...
+```
+변경된 부분을 살펴보면
+1. `FROM node:alpine as dependences`  
+   처음 FROM 절에 name이 추가되었다. 의존성 cache 후에 프로젝트를 빌드하는
+   단계에서 cache를 베이스로 하기 위함이다.
+2. `COPY package.json /app/`  
+   전체를 복사하지 않고 프로젝트의 의존성을 관리하는 `package.json`만 복사하도록
+   변경되었다.  
+   COPY 명령어로 레이어가 생성될 때는 COPY되는 파일의 변경에 따라 생성이 되는데
+   프로젝트 전체 파일을 대상으로 하게되면 프로젝트의 의존성 변경과 관계없이
+   레이어가 변경이 되기 때문에 `package.json`만 복사하게되면 프로젝트 의존성
+   변경이 없으면 기존에 빌드된 이미지를 도커가 cache 할 것이다.
 
+의존성 cache 부분을 변경하면서 빌드를 제외하였기 때문에 빌드 부분을 추가해보면
+```dockerfile
+...
+FROM dependences as build
+COPY . /app
+RUN yarn build
+... 
+# Nginx 부분 동일
+```
+라인 별로 살펴보면
+1.  `FROM dependences`는 위의 의존성 cache한 부분을 base로 하고 있다.  
+    이게 어떻게 동작하는지는 나중에 살펴보자.
+2.  나머지 프로젝트내 파일을 복사한다.
+3.  빌드를 실행한다.
+
+크게 바뀐 부분은 의존성 설치와 빌드단계를 나눴다는 것이다.  
+하지만 다들 알다시피 도커 빌드는 위에서 아래로 흐른다.  
+그러면 빌드 단계 앞에 의존성 설치 부분이 존재하기 때문에 빌드 단계에서 의존성
+설치가 진행되지 않을까?  
+이 부분 도커 빌드를 하면서 살펴보자
+```bash
+DOCKER_BUILDKIT=1 docker build . --target=dependences -t dependences
+# 실행 결과
+[+] Building 2.4s (9/9) FINISHED
+ => [internal] load build definition from Dockerfile
+ => => transferring dockerfile: 37B
+ => [internal] load .dockerignore
+ => => transferring context: 34B
+ => [internal] load metadata for docker.io/library/node:alpine
+ => [dependences 1/4] FROM docker.io/library/node:alpine@sha256:...
+ => [internal] load build context
+ => => transferring context: 34B
+ => CACHED [dependences 2/4] WORKDIR /app
+ => CACHED [dependences 3/4] COPY package.json /app/
+ => CACHED [dependences 4/4] RUN yarn
+ => exporting to image
+ => => exporting layers
+ => => writing image sha256:....
+ => => naming to docker.io/library/dependences
+
+# 이미지 검색
+docker images | grep dependences
+# 이미지 검색 결과
+REPOSITORY    TAG   IMAGE ID            CREATED             SIZE
+dependences latest  67b2b7604004        About an hour ago   441MB
+
+```
+먼저 의존성 cache를 위해서 빌드를 하였다.  
+빌드 명령어에 두가지가 추가되었는데  
+`--target=dependences`은 첫 번째 stage인 `FROM node:alpine as
+dependences`만 실행하라는 것이고 그렇게 의존성이 설치된 이미지의 tag를 지정하기
+위해 `-t dependences` 추가하여 dependences라고 tag를 달아 주었다.
+
+이어서 프로젝트 빌드 단계를 진행하면
+```bash
+DOCKER_BUILDKIT=1 docker build . --target=build --cache-from=dependences -t build
+# 결과
+[+] Building 12.0s (12/12) FINISHED                                               
+ => [internal] load .dockerignore                                            0.0s
+ => => transferring context: 34B                                             0.0s
+ => [internal] load build definition from Dockerfile                         0.0s
+ => => transferring dockerfile: 37B                                          0.0s
+ => [internal] load metadata for docker.io/library/node:alpine               2.1s
+ => importing cache manifest from dependences                                0.0s
+ => [dependences 1/4] FROM docker.io/library/node:alpine@sha256:...          0.0s
+ => [internal] load build context                                            0.0s
+ => => transferring context: 509.11kB                                        0.0s
+ => CACHED [dependences 2/4] WORKDIR /app                                    0.0s
+ => CACHED [dependences 3/4] COPY package.json /app/                         0.0s
+ => CACHED [dependences 4/4] RUN yarn                                        0.0s
+ => [build 1/2] COPY . /app                                                  0.0s
+ => [build 2/2] RUN yarn build                                               9.7s
+ => exporting to image                                                       0.0s
+ => => exporting layers                                                      0.0s
+ => => writing image sha256:...                                              0.0s 
+ => => naming to docker.io/library/build                                     0.0s 
+```
+여기서는 `--cache-from=dependences` 추가되었다.
+
+중간에 이야기 했듯이 도커 빌드는 Dockerfile의 위에서 아래로 흐르기 때문에 의존성
+설치 부분이 이미 빌드가 된 이미지를 참조하기 때문에 13~15라인은 도커에서 cache
+처리된것을 확인 할 수 있다.
+
+그렇기 때문에 90초 이상이 걸리던 의존성 설치부분이 cache되어 0초가 되었다.  
+배포를 위한 빌드 단계의 시간을 절약할 수 있게 되었다.  
+이제 의존성 부분을 이미지화 하는 부분을 CI단계에서 자동화 처리한다면 배포를 위해서
+시간은 더 단축될것이다.
+
+
+----
+참고
+1. 도커 [레이어](https://docs.docker.com/storage/storagedriver/)
+2. [multi-stage builds](https://docs.docker.com/develop/develop-images/multistage-build/)
