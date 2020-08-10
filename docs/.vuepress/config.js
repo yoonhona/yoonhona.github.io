@@ -42,15 +42,7 @@ module.exports = {
       after : () => '</details>\n',
     }],
 
-    ['vuepress-plugin-rss',
-      {
-        base_url: '/', // required
-        site_url: 'https://yoonhona.github.io', // required
-        count: 20,
-        copyright: '2020 NYH',
-        language: 'ko'
-      }
-    ]
+    require('./plugins/rss'),
 
   ],
 
