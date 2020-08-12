@@ -8,9 +8,6 @@ module.exports = {
     },
   },
 
-  // Theme to use
-  theme: 'meteorlxy',
-
   markdown: {
     lineNumbers   : true,
     toc           : {
@@ -86,6 +83,10 @@ module.exports = {
           account: 'Na Yoonho',
           link   : 'https://www.facebook.com/profile.php?id=100001763897524',
         },
+
+        rss: {
+          link: 'https://yoonhona.github.io/rss'
+        }
       },
 
     },
