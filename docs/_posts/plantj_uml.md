@@ -1,5 +1,6 @@
 ---
 title: UML 코드로 관리하기(부제. 요구사항 시각화하기)
+description: PlantUML로 로직 시각화 하기
 date: 2020-01-12
 category: Tool
 tags:
@@ -7,6 +8,7 @@ tags:
   - 요구사항
 vssue: true
 type: post
+draft: false
 ---
 
 > 다이어그램을 UI 툴이 아닌 코드로 작성하는 환경에 대해 알아봅니다.  

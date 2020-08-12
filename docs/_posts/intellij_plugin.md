@@ -1,5 +1,6 @@
 ---
-title: 어떤 FE 개발자의 Intellij 사용법 - 플러그인
+title: 어떤 프론트엔드 개발자의 Intellij 사용법 - 플러그인
+description: 프론트엔드 개발자가 Intellij에서 사용 & 추천하는 플러그인
 date: 2020-07-03
 category: Tool
 tags:

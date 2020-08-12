@@ -1,5 +1,6 @@
 ---
-title: 어떤 FE 개발자의 Intellij 사용법 - 설치(feat. Toolbox)
+title: 어떤 프론트엔드 개발자의 Intellij 사용법 - 설치(feat. Toolbox)
+description: 프론트엔드 개발자가 Intellij를 설치하는 방법
 date: 2020-06-14
 category: Tool
 tags:
@@ -8,6 +9,7 @@ tags:
   - Toolbox
 vssue: true
 type: post
+draft: false
 ---
 ::: tip 이 글은  
 macOS, Intellij 2020.1.1에서 작성되었습니다.  

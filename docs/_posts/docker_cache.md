@@ -1,5 +1,6 @@
 ---
 title: SPA 배포를 위한 도커 - 의존성 cache를 위한 Dockerfile 만들기
+description: 빠른 배포를 위한 cache용 Dockerfile을 만들어보자
 date: 2020-07-31
 category: Docker
 tags:
@@ -19,6 +20,8 @@ docker desktop community 2.3.0.4
 [사용된 소스 코드](https://github.com/yoonhona/study/tree/master/example/docker/cache)
 
 :::
+
+![](https://www.docker.com/sites/default/files/d8/2019-07/horizontal-logo-monochromatic-white.png)
 
 일단
 [Create React App](https://create-react-app.dev/)^이하⎺CRA^ 을 사용하여

@@ -1,5 +1,6 @@
 ---
 title: SPA 배포를 위한 도커 - 들어가기
+description: SPA CI/CD를 위한 Dockerfile 만들기 1편 도커란?
 date: 2020-07-17
 category: Docker
 tags:
