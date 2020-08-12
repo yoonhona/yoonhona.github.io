@@ -1,5 +1,7 @@
 const path = require('path')
 const RSS = require('rss')
+const crypto = require('crypto');
+const hash = crypto.createHash('sha256');
 
 /**
  * https://github.com/youngtailors/vuepress-plugin-rss
@@ -29,10 +31,11 @@ module.exports = (pluginOptions, ctx) => {
         .map(page => ({...page, date: new Date(page.frontmatter.date || '')}))
         .sort((a, b) => b.date - a.date)
         .map(page => ({
-          title: page.frontmatter.title,
+          title      : page.frontmatter.title,
           description: page.frontmatter.description,
-          url: `${pluginOptions.site_url}${page.path}`,
-          date: page.date,
+          url        : `${feed.site_url}${page.path}`,
+          date       : page.date,
+          guid       : hash.update(page._content).copy().digest('hex'),
         }))
         .slice(0, count)
         .forEach(page => feed.item(page))
