@@ -18,7 +18,7 @@ Intellij에서 코드 작성을 도와주는 기능들을 살펴봅니다.
 
 :::
 
-## [리팩토링](https://www.jetbrains.com/help/idea/refactoring-source-code.html)
+## [리팩토링 (⌃ + T)](https://www.jetbrains.com/help/idea/refactoring-source-code.html)
 
 > 리팩토링은 겉으로 드러나는 코드의 기능은 바꾸지 않으면서 내부 구조를 개선하는
 > 방식으로 소프트웨어 시스템을 수정하는 과정이다.  
@@ -49,7 +49,7 @@ Share라는 인터페이스의 인터페이스명, 필드명을 변경하면
 
 ## 코드 관련
 
-### [자동 완성](https://www.jetbrains.com/help/idea/auto-completing-code.html)
+### [자동 완성 (⌃ + space)](https://www.jetbrains.com/help/idea/auto-completing-code.html)
 
   자동완성할 위치에서 ⌃(ctrl) + space를 눌러주게 되면 작동한다.
 
@@ -66,7 +66,7 @@ Share라는 인터페이스의 인터페이스명, 필드명을 변경하면
   ![image_12](./images/image_12.png)
   ![image_14](./images/completion_live_templates.gif)
 
-### [다른 의도](https://www.jetbrains.com/help/idea/intention-actions.html)
+### [다른 의도 (⌥ + enter)](https://www.jetbrains.com/help/idea/intention-actions.html)
 
 코드 상 문법, 퍼포먼스 등을 Intellij에서 분석하여 권장사항에 대해 표시하고
 변경해주는 기능
@@ -95,28 +95,11 @@ Share라는 인터페이스의 인터페이스명, 필드명을 변경하면
 
 ![image_17](./images/image_17.png)
 
-## 그외
-### 클립보드(⌘ + ⇧ + V)
-![image_18](./images/image_18.png)
-
-### [임시 파일(⌘ + ⇧ + N)](https://www.jetbrains.com/help/idea/scratches.html)
-
-  프로젝트에 포함되지 않는 임시 파일로 일부 로직 테스트 용도로 사용할 수 있다.
-
-![image_19](./images/image_19.png)  
-![image_20](./images/image_20.png)
-
-### [import 정리](https://www.jetbrains.com/help/idea/creating-and-optimizing-imports.html#optimize-imports)
-
-사용하지 않는 import 제거하고 설정에 따라 정렬도 도와준다.
-
-![](./images/intellij_optimize-imports.gif)
-
 
 ## 윈도우
 
-### Tab Split
-- 가로 / 세로 분할(⌘ + ⇧ + A -> split 검색)
+### Tab Split(⌘ + ⇧ + A -> split 검색)
+탭을 가로 / 세로 분할하는 기능
 
   Redux 등의 상태 라이브러리를 사용하게 되어 참조해야 할 파일이 많을 경우 유용,
   단축키를 지정하여 사용하게 되면 더 빠르게 사용 가능
@@ -139,3 +122,21 @@ Distraction-free 적용 시 모든 메뉴가 감춰지기 때문에 다른 기�
 
 - Distraction-free 적용 후
   ![image_23](./images/image_23.png)
+
+
+## 그외
+### 클립보드(⌘ + ⇧ + V)
+![image_18](./images/image_18.png)
+
+### [임시 파일(⌘ + ⇧ + N)](https://www.jetbrains.com/help/idea/scratches.html)
+
+  프로젝트에 포함되지 않는 임시 파일로 일부 로직 테스트 용도로 사용할 수 있다.
+
+![image_19](./images/image_19.png)  
+![image_20](./images/image_20.png)
+
+### [import 정리](https://www.jetbrains.com/help/idea/creating-and-optimizing-imports.html#optimize-imports)
+
+사용하지 않는 import 제거하고 설정에 따라 정렬도 도와준다.
+
+![](./images/intellij_optimize-imports.gif)
