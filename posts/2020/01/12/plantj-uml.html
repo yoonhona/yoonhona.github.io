@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>UML 코드로 관리하기(부제. 요구사항 시각화하기) | 생계형 🐾者</title>
+    <meta name="generator" content="VuePress 1.5.3">
+    <meta name="description" content="PlantUML로 로직 시각화 하기">
+    <link rel="preload" href="/assets/css/0.styles.a760f68a.css" as="style"><link rel="preload" href="/assets/js/app.4cbb8bd7.js" as="script"><link rel="preload" href="/assets/js/11.8a2af103.js" as="script"><link rel="preload" href="/assets/js/7.3cce7458.js" as="script"><link rel="prefetch" href="/assets/js/1.71150f46.js"><link rel="prefetch" href="/assets/js/10.092ad01e.js"><link rel="prefetch" href="/assets/js/12.6e69d991.js"><link rel="prefetch" href="/assets/js/13.d474a548.js"><link rel="prefetch" href="/assets/js/14.08da88c9.js"><link rel="prefetch" href="/assets/js/15.91027415.js"><link rel="prefetch" href="/assets/js/16.c40e445a.js"><link rel="prefetch" href="/assets/js/17.09862d2e.js"><link rel="prefetch" href="/assets/js/18.b6542bdb.js"><link rel="prefetch" href="/assets/js/19.77e0ba09.js"><link rel="prefetch" href="/assets/js/20.bcca7d0d.js"><link rel="prefetch" href="/assets/js/21.22802ba4.js"><link rel="prefetch" href="/assets/js/22.e91c711d.js"><link rel="prefetch" href="/assets/js/23.709ee5af.js"><link rel="prefetch" href="/assets/js/3.8257086b.js"><link rel="prefetch" href="/assets/js/4.e398776e.js"><link rel="prefetch" href="/assets/js/5.6220f8dd.js"><link rel="prefetch" href="/assets/js/6.ece0e64d.js"><link rel="prefetch" href="/assets/js/8.6da1e87b.js"><link rel="prefetch" href="/assets/js/9.6bc8fee4.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.a760f68a.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div id="vuepress-theme-meteorlxy"><header class="header" data-v-7a046aea><div data-v-e4145d0a data-v-7a046aea><nav class="navbar" data-v-e4145d0a><div class="container" data-v-e4145d0a><a href="/" class="router-link-active" data-v-e4145d0a><span class="navbar-site-name" data-v-e4145d0a>
+          생계형 🐾者
+        </span></a> <div class="navbar-toggler" data-v-e4145d0a><svg class="icon" style="font-size:1.2em;" data-v-e4145d0a data-v-e4145d0a><title data-v-e4145d0a data-v-e4145d0a>menu</title><use xlink:href="#icon-menu" data-v-e4145d0a data-v-e4145d0a></use></svg></div> <div class="navbar-links" data-v-e4145d0a><a href="/" class="navbar-link" data-v-e4145d0a>
+            Home
+          </a><a href="/posts/" class="navbar-link router-link-active" data-v-e4145d0a>
+            Post
+          </a><a href="https://github.com/yoonhona" target="_blank" rel="noopener noreferrer" class="navbar-link" data-v-e4145d0a><span data-v-e4145d0a>Github</span> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" data-v-e4145d0a data-v-e4145d0a><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div></div></nav> <div class="navbar-holder" style="display:none;" data-v-e4145d0a></div></div> <div class="banner" data-v-98d6aa8c data-v-7a046aea data-v-7a046aea><div class="container" data-v-98d6aa8c><div class="center" data-v-98d6aa8c><h1 data-v-98d6aa8c data-v-7a046aea>
+          UML 코드로 관리하기(부제. 요구사항 시각화하기)
+        </h1></div></div></div></header> <div class="container clearfix show-aside" data-v-4dd605a1 data-v-4dd605a1><main class="main" data-v-4dd605a1><div class="post" data-v-4dd605a1 data-v-4dd605a1><section class="post-meta main-div" data-v-4e23451f><section class="post-date clearfix" data-v-4e23451f><span class="create-date" data-v-4e23451f>
+      Created : 2020-01-12
+    </span> <span class="update-date" data-v-4e23451f>
+      Updated : 2020-08-13
+    </span></section> <section class="post-links" data-v-4e23451f><!----> <a href="/posts/2020/05/04/fe-dev-intellj-setup.html" class="post-link" data-v-4e23451f>
+      Next Post : 어떤 프론트엔드 개발자의 Intellij 사용법 - 나는 왜 Intellij IDEA를 사용하는가
+    </a></section></section> <article class="main-div"><div class="post-content content content__default"><blockquote><p>다이어그램을 UI 툴이 아닌 코드로 작성하는 환경에 대해 알아봅니다.<br>
+해당 글은
+<a href="https://wikibook.co.kr/software-requirements-3rd/" target="_blank" rel="noopener noreferrer">소프트웨어 요구사항 3<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>을
+참고하였습니다.<br>
+문서 작성 환경: OSX Catalina, Intellij Ultimate 2019.3</p></blockquote> <h2 id="개발-전-요구사항-시각화하기"><a href="#개발-전-요구사항-시각화하기" class="header-anchor">#</a> 개발 전 요구사항 시각화하기</h2> <div class="custom-block tip"><p class="custom-block-title">소프트웨어 요구사항 3 - 요구사항 모델 만들기</p> <p>시각적인 요구사항 모델은 <strong>누락되거나 관련 없는</strong>, 혹은 <strong>모순된 요구사항</strong>을 식별하는 데 이바지 할 수 있다.<br>
+...<br>
+15번째 요구사항을 확인하는 동안 <strong>처음 몇 개</strong>의 요구사항은 <strong>이미 잊어버렸을 것</strong>이다.<br>
+단순히 <strong>문자 형태</strong>의 요구사항을 <strong>검토</strong>함으로써 모든 오류를 찾을 확률은 <strong>낮다.</strong></p></div> <p>프로젝트에서 흔히 요구사항 정의서는 <strong>화면 설계서(혹은 기획서)</strong> 일 것 입니다.<br>
+여기에는 도메인 요구사항, 시스템의 기능에 대해서 담고 있을 것이지만 개발을 위한 명세를 추가 정의할 필요가 있을 것이고, 또
+책의 내용대로 기획서에 모순된 내용이 존재할 수도 있습니다.<br>
+이런 이유로 개발자는 개발을 시작하기 전 요구사항에 대해 UML을 통해 다시 정의해 볼 필요가 있습니다.</p> <h2 id="plantuml"><a href="#plantuml" class="header-anchor">#</a> <a href="https://plantuml.com/ko/" target="_blank" rel="noopener noreferrer">PlantUML<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></h2> <p>중요한 UML이지만 작성하려면 번거로운 것이 사실입니다.<br>
+많이 쓰이는 <a href="https://www.draw.io/" target="_blank" rel="noopener noreferrer">draw.io<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> 툴로 UML을 작성하고 유지보수 한다고 생각하면 여간
+번거롭지 않습니다.<br>
+마우스라는 인터페이스의 한계가 아닐까 합니다.</p> <p><a href="https://plantuml.com/ko/" target="_blank" rel="noopener noreferrer">PlantUML<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>은 코드로 다양한 UML을 작성하게 해주는 오픈소스입니다.<br>
+시쿼스, 유스케이스, 클래스 다이어그램 등 다양한 다이어그램을 지원하고 있습니다.<br>
+문법이 어렵지 않고 많은 툴에서 지원하고 있습니다.<br>
+지금 이 글을 작성한 마크다운에서도 PlantUML을 작성할 수 있는 라이브러리가 존재합니다.</p> <div class="language-puml line-numbers-mode"><pre class="language-text"><code>@startuml
+start
+:마크다운에서도;
+:UML 작성이;
+:가능 합니다.;
+end
+@enduml
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><img src="https://www.plantuml.com/plantuml/svg/SoWkIImgAStDuG8pkAnUB-zusxZcTVUIDxEsl9a-uKtBdDVzBTPSLg6-FWflvaryqxBnpTmjGFwh3GslkvOgl9swydLt1r2vdZLNQbuAbmEG09e60000" alt="uml diagram"> <p>이렇듯 코드로 작성이 가능하기 때문에 버전관리도 가능하게되고 유지보수에 많은 이점이 있습니다.</p> <h3 id="문법-살펴보기"><a href="#문법-살펴보기" class="header-anchor">#</a> 문법 살펴보기</h3> <p>간단하게 PlantUML의 문법에 대해서 살펴보려 합니다.</p> <h4 id="_1-공통"><a href="#_1-공통" class="header-anchor">#</a> 1) 공통</h4> <ol><li>오류 화면<br>
+문법 error 발생 시 에러 정보에 대해서 알려주기 때문에 문서를 참고하여 수정하면 됩니다.</li></ol> <img src="https://www.plantuml.com/plantuml/svg/SoWkIImgAStDuR9ABIhAB-9oICrB0N81" alt="uml diagram"> <ol start="2"><li>제목</li></ol> <div class="language-puml line-numbers-mode"><pre class="language-text"><code>@startuml
+title 제목 입니다.
+Alice -&gt; Bob
+@enduml
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><img src="https://www.plantuml.com/plantuml/svg/SoWkIImgAStDuIh9BCb9LNYpOCxhLIiLtinhVTtTyRfxYHwNOqvcSgg2hfs2KtuIbqDgNWfGCG00" alt="uml diagram"> <ol start="3"><li>스타일
+<ul><li>텍스트<br>
+Creole 엔진을 사용하여 다양한 표현 가능.<br>
+자세한 사항은 <a href="https://plantuml.com/ko/creole" target="_blank" rel="noopener noreferrer">문서<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>를 참고해주세요.</li> <li>색상<br>
+요소의 색상을 직접 수정 할 수 있습니다.</li></ul> <div class="language-puml line-numbers-mode"><pre class="language-text"><code>@startuml
+Alice -&gt; Bob: &lt;font color=&quot;#FF5733&quot;&gt;색상 변경 &lt;/font&gt;
+@enduml
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><img src="https://www.plantuml.com/plantuml/svg/SoWkIImgAStDuL800iUSpEHK1Lqx1QVy92i5cxJyl1A5vFoS_29RfQISqbGbkpVDdM-Q6nLURsvujMclWeq-I8KTbqDgNWhG2000" alt="uml diagram"> <ul><li>스킨(skinparam)<br>
+skinparam 명령어를 사용하여 색상, 글꼴, 정렬을 일괄 지정할 수 있습니다.</li></ul> <div class="language-puml line-numbers-mode"><pre class="language-text"><code>@startuml
+skinparam monochrome true
+Alice -&gt; Bob
+@enduml
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><img src="https://www.plantuml.com/plantuml/svg/SoWkIImgAStDuL80WkBipBo2nAB4N8NS_Bpyv8oY_DnKXPAYqbImh6DEPdAgWgwTWbD-4fT3QbuAK1i0" alt="uml diagram"></li> <li>그 외<br>
+Header, Caption, 범례 등 기능등이 존재합니다.<br>
+자세한 사항은 <a href="https://plantuml.com/ko/commons" target="_blank" rel="noopener noreferrer">문서<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> 참조</li></ol> <h4 id="_2-activity-diagram"><a href="#_2-activity-diagram" class="header-anchor">#</a> 2) Activity Diagram</h4> <p>로직컬한 부분에 대해서 표현해주는 Activity Diagram입니다.</p> <div class="language-puml line-numbers-mode"><pre class="language-text"><code>@startuml
+start
+if (Graphviz installed?) then (yes)
+  :process all\ndiagrams;
+else (no)
+  :process only;
+endif
+stop
+@enduml
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br></div></div><img src="https://www.plantuml.com/plantuml/svg/LOsn3O0m30HxJ-4oMG4Aw5Y29W83aOmJnG49fiVGqVt_dVIzrb3giJF0bo0kw8OIydR66wFOo4npvx5k9EWkKW-8JIvf8bKqEieSmrh2hYqGAw6Jz7EIy6N8jELzIHbwA_Rv0000" alt="uml diagram"> <p>조건문외에도 반복문, 병렬성, 커넥터, 그룹화 등 다양한 표현을 할 수 이씁니다.<br>
+자세한 사항은 <a href="https://plantuml.com/ko/activity-diagram-beta" target="_blank" rel="noopener noreferrer">문서<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> 참조</p> <h4 id="_3-sequence-diagram"><a href="#_3-sequence-diagram" class="header-anchor">#</a> 3) Sequence Diagram</h4> <p>프로세스 단계 별 수행하는 행위자 혹은 시스템을 표현합니다.</p> <div class="language-puml line-numbers-mode"><pre class="language-text"><code>@startuml
+Alice -&gt; Bob: Authentication Request
+Bob --&gt; Alice: Authentication Response
+Alice -&gt; Bob: Another authentication Request
+Alice &lt;-- Bob: Another authentication Response
+@enduml
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><img src="https://www.plantuml.com/plantuml/svg/SoWkIImgAStDuNBCoKnELT2rKt3AJx9IS2mjoKZDAybCJYp9pCzJ24ejB4qjBk42oYde0jM05MDHLLoGdrUSoeLkM5u-K5sHGY9sGo6ARNHr2QY66kwGcfS2T300" alt="uml diagram"> <p>흐름간 메시지 전달, 메시지 순서, 메시지 그룹화 등 추가적인 표현을 할 수 있습니다.<br>
+자세한 사항은 <a href="https://plantuml.com/ko/sequence-diagram" target="_blank" rel="noopener noreferrer">문서<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> 참조</p> <h4 id="_4-state-diagram"><a href="#_4-state-diagram" class="header-anchor">#</a> 4) State Diagram</h4> <p>시스템의 동작에 따라 변화하는 상태를 표한합니다.</p> <div class="language-puml line-numbers-mode"><pre class="language-text"><code>@startuml
+[*] --&gt; NotShooting
+state NotShooting {
+  [*] --&gt; Idle
+  Idle --&gt; Configuring : EvConfig
+  Configuring --&gt; Idle : EvConfig
+}
+state Configuring {
+  [*] --&gt; NewValueSelection
+  NewValueSelection --&gt; NewValuePreview : EvNewValue
+  NewValuePreview --&gt; NewValueSelection : EvNewValueRejected
+  NewValuePreview --&gt; NewValueSelection : EvNewValueSaved
+  state NewValuePreview {
+	 State1 -&gt; State2
+  }
+}
+@enduml
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br></div></div><img src="https://www.plantuml.com/plantuml/svg/dP4n2y8m48LdxrVSB7JGqK4Auk1If04NSIZch96OG4pQeVI_Uwq6KdLoIkwzxzt1NVxmbVFXhk4uFs6MhR6mNbojzShK0EnwIYNi036YEwc9o-4Pwuqr5rK7Dt0ht3QlcedKYC6KwEEa54md5TGUAXr8aAQpLzQmzwLDoBsZHb4xJebQ4ehsp-QJK4atLad-5HPLmqcElXVvqQ236Oh1MI2t6dzBXdaTFUHa9D_b2G00" alt="uml diagram"> <p>이렇듯 상태에 따라 처리되는 과정을 표현할 수 있으며, 상태 내부에 상태도 표현이 가능합니다.<br>
+이 외에도 멀티 스레드, 동시성 등을 표현할 수 있습니다.<br>
+자세한 사항은 <a href="https://plantuml.com/en/state-diagram" target="_blank" rel="noopener noreferrer">문서<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> 참조</p> <p>이 외에도 많은 기능과 다이어그램을 제공함으로 자세한 내용은 <a href="https://plantuml.com/ko/sitemap-language-specification" target="_blank" rel="noopener noreferrer">문서<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>를 참고 바랍니다.</p> <h3 id="여러-도구로-plantuml-작성해보기"><a href="#여러-도구로-plantuml-작성해보기" class="header-anchor">#</a> 여러 도구로 PlantUML 작성해보기</h3> <h4 id="_1-intellij-idea"><a href="#_1-intellij-idea" class="header-anchor">#</a> 1) Intellij IDEA</h4> <blockquote><p>OS X 환경, <a href="https://brew.sh/index_ko" target="_blank" rel="noopener noreferrer">Homebrew<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>가 설치되어 있다는 가정하에 진행됩니다.
+<a href="https://brew.sh/index_ko" target="_blank" rel="noopener noreferrer">Homebrew<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>가 설치되어 있지 않다면 사이트에 설명을 참고하여 설치해주세요.</p></blockquote> <ul><li>설치
+<ol><li>커맨드 환경에서 <code>brew install plantuml</code> 타이핑하여 설치
+<ul><li>이 부분이 진행되지 않으면 Intellij Idea에서 미리보기를 지원하지 못합니다.</li></ul></li> <li>Intellij IDEA -&gt; 환경설정 -&gt; plugins -&gt; PlantUML integration 플러그인 검색하여 설치</li> <li>설치를 완료하게되면 File - New - <code>PlantUML File</code>이 생긴것을 볼 수 있습니다.
+<img src="/assets/img/0f3736bb.f149997d.png" alt=""></li> <li>stretch file 목록에서도 확인 가능합니다.<br> <img src="/assets/img/d0c58e27.c6fa8050.png" alt=""></li></ol></li> <li>작성해보기
+<ol><li>파일명을 입력하고 다이어그램 종류를 선택합니다.<br> <img src="/assets/img/04306598.061ea3c7.png" alt=""></li> <li>작성 후 스크린샷 저장<br>
+Sequence Diagram을 한 파일에 세 페이지를 작성하여 보았습니다.<br>
+플러그인에서 가장 중요한 기능인 이미지 파일로 내보내기를 살펴보겠습니다.
+<ul><li>전체<br> <img src="/assets/img/675d8a9f.357faf67.png" alt=""> <ol><li>전체 페이지를 페이지 별 이미지 파일로 내보내기 하는 버튼입니다.</li> <li>ALL PAGES가 선택되어 있어야 합니다.</li></ol></li> <li>페이지<br>
+각 페이지별 내용이 많을 경우 나눠서 불 수 있습니다.<br> <img src="/assets/img/ea75c365.ba3e44e4.png" alt=""> <ol><li>ALL PAGES를 눌러 페이지를 변경합니다.</li> <li>페이지의 내용을 이미지로 Clipboard에 복사합니다.</li> <li>페이지의 내용을 이미지 파일로 내보냅니다.</li></ol></li></ul></li></ol></li></ul></div></article> <section class="post-meta main-div" data-v-4e23451f><section class="post-date clearfix" data-v-4e23451f><span class="create-date" data-v-4e23451f>
+      Created : 2020-01-12
+    </span> <span class="update-date" data-v-4e23451f>
+      Updated : 2020-08-13
+    </span></section> <section class="post-links" data-v-4e23451f><!----> <a href="/posts/2020/05/04/fe-dev-intellj-setup.html" class="post-link" data-v-4e23451f>
+      Next Post : 어떤 프론트엔드 개발자의 Intellij 사용법 - 나는 왜 Intellij IDEA를 사용하는가
+    </a></section></section> <div id="post-comments" class="main-div"><!----></div></div></main> <aside class="aside" data-v-4dd605a1><div class="info-card main-div" data-v-9d847660 data-v-4dd605a1><div class="info-card-header" data-v-9d847660><img src="https://avatars1.githubusercontent.com/u/10597948?s=460&amp;v=4" alt="생계형 🐾者" class="info-avatar" data-v-9d847660></div> <div class="info-card-body" data-v-9d847660><section class="info-nickname" data-v-9d847660>
+      생계형 🐾者
+    </section> <section class="info-desc" data-v-9d847660>생계형 개발자의 블로그입니다.<br />프론트 엔드 개발을 하며<br /> React.js를 다룹니다.</section> <section class="info-contact" data-v-9d847660><section data-v-9d847660><span title="Seoul, Korea" data-v-9d847660 data-v-9d847660><svg class="icon" style="font-size:1em;" data-v-9d847660 data-v-9d847660><title data-v-9d847660 data-v-9d847660>Seoul, Korea</title><use xlink:href="#icon-location" data-v-9d847660 data-v-9d847660></use></svg><span class="info-text" data-v-9d847660 data-v-9d847660>
+          Seoul, Korea
+        </span></span></section> <!----> <section data-v-9d847660><a href="mailto:lucky7_nyh@naver.com" title="lucky7_nyh@naver.com" data-v-9d847660 data-v-9d847660><svg class="icon" style="font-size:1em;" data-v-9d847660 data-v-9d847660><title data-v-9d847660 data-v-9d847660>lucky7_nyh@naver.com</title><use xlink:href="#icon-email" data-v-9d847660 data-v-9d847660></use></svg><span class="info-text" data-v-9d847660 data-v-9d847660>
+          lucky7_nyh@naver.com
+        </span></a></section></section></div> <div class="info-card-footer" data-v-9d847660><section class="info-sns clearfix" data-v-9d847660><a href="https://github.com/yoonhona" target="_blank" class="sns-link" data-v-9d847660><span title="GitHub: yoonhona" class="sns-icon" data-v-9d847660 data-v-9d847660><svg class="icon" style="font-size:1.5em;" data-v-9d847660 data-v-9d847660><title data-v-9d847660 data-v-9d847660>GitHub: yoonhona</title><use xlink:href="#icon-github" data-v-9d847660 data-v-9d847660></use></svg></span></a><a href="https://www.facebook.com/profile.php?id=100001763897524" target="_blank" class="sns-link" data-v-9d847660><span title="Facebook: Na Yoonho" class="sns-icon" data-v-9d847660 data-v-9d847660><svg class="icon" style="font-size:1.5em;" data-v-9d847660 data-v-9d847660><title data-v-9d847660 data-v-9d847660>Facebook: Na Yoonho</title><use xlink:href="#icon-facebook" data-v-9d847660 data-v-9d847660></use></svg></span></a><a href="https://yoonhona.github.io/rss" target="_blank" class="sns-link" data-v-9d847660><span title="RSS: " class="sns-icon" data-v-9d847660 data-v-9d847660><svg class="icon" style="font-size:1.5em;" data-v-9d847660 data-v-9d847660><title data-v-9d847660 data-v-9d847660>RSS: </title><use xlink:href="#icon-rss" data-v-9d847660 data-v-9d847660></use></svg></span></a></section></div></div> <div class="post-nav-card main-div" style="position:relative;top:0;width:0px;" data-v-4dd605a1><div class="post-nav-contents"><svg class="icon"><title>book</title><use xlink:href="#icon-book"></use></svg> <span>목차</span> <div class="post-nav-toc"><ul><li><a href="/posts/2020/01/12/plantj-uml.html#개발-전-요구사항-시각화하기">개발 전 요구사항 시각화하기</a></li><li><a href="/posts/2020/01/12/plantj-uml.html#plantuml">PlantUML</a><ul><li><a href="/posts/2020/01/12/plantj-uml.html#문법-살펴보기">문법 살펴보기</a></li><li><a href="/posts/2020/01/12/plantj-uml.html#여러-도구로-plantuml-작성해보기">여러 도구로 PlantUML 작성해보기</a></li></ul></li></ul></div></div> <div class="post-nav-comments"><svg class="icon"><title>comment</title><use xlink:href="#icon-comment"></use></svg> <a href="/posts/2020/01/12/plantj-uml.html#post-comments">
+      Comments
+    </a></div></div></aside></div> <footer class="footer" data-v-1375e54c><p class="footer-sns-links" data-v-1375e54c><a href="https://github.com/yoonhona" target="_blank" class="sns-link" data-v-1375e54c><span title="GitHub: yoonhona" class="sns-icon" data-v-1375e54c data-v-1375e54c><svg class="icon" style="font-size:25px;" data-v-1375e54c data-v-1375e54c><title data-v-1375e54c data-v-1375e54c>GitHub: yoonhona</title><use xlink:href="#icon-github" data-v-1375e54c data-v-1375e54c></use></svg></span></a><a href="https://www.facebook.com/profile.php?id=100001763897524" target="_blank" class="sns-link" data-v-1375e54c><span title="Facebook: Na Yoonho" class="sns-icon" data-v-1375e54c data-v-1375e54c><svg class="icon" style="font-size:25px;" data-v-1375e54c data-v-1375e54c><title data-v-1375e54c data-v-1375e54c>Facebook: Na Yoonho</title><use xlink:href="#icon-facebook" data-v-1375e54c data-v-1375e54c></use></svg></span></a><a href="https://yoonhona.github.io/rss" target="_blank" class="sns-link" data-v-1375e54c><span title="RSS: " class="sns-icon" data-v-1375e54c data-v-1375e54c><svg class="icon" style="font-size:25px;" data-v-1375e54c data-v-1375e54c><title data-v-1375e54c data-v-1375e54c>RSS: </title><use xlink:href="#icon-rss" data-v-1375e54c data-v-1375e54c></use></svg></span></a></p> <p class="footer-text" data-v-1375e54c><span data-v-1375e54c>Powered by </span> <a href="https://github.com/vuejs/vuepress" target="_blank" data-v-1375e54c>
+      VuePress
+    </a> <span data-v-1375e54c> | </span> <a href="https://github.com/meteorlxy/vuepress-theme-meteorlxy" target="_blank" data-v-1375e54c>
+        meteorlxy
+      </a></p> <!----></footer></div><div class="global-ui"><!----><!----></div></div>
+    <script src="/assets/js/app.4cbb8bd7.js" defer></script><script src="/assets/js/11.8a2af103.js" defer></script><script src="/assets/js/7.3cce7458.js" defer></script>
+  </body>
+</html>

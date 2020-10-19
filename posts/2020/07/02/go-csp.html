@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Go 언어의 순차적인 프로세스간의 통신(CSP) | 생계형 🐾者</title>
+    <meta name="generator" content="VuePress 1.5.3">
+    <meta name="description" content="생계형 개발자의 블로그입니다.<br />프론트 엔드 개발을 하며<br /> React.js를 다룹니다.">
+    <link rel="preload" href="/assets/css/0.styles.a760f68a.css" as="style"><link rel="preload" href="/assets/js/app.4cbb8bd7.js" as="script"><link rel="preload" href="/assets/js/11.8a2af103.js" as="script"><link rel="preload" href="/assets/js/22.e91c711d.js" as="script"><link rel="prefetch" href="/assets/js/1.71150f46.js"><link rel="prefetch" href="/assets/js/10.092ad01e.js"><link rel="prefetch" href="/assets/js/12.6e69d991.js"><link rel="prefetch" href="/assets/js/13.d474a548.js"><link rel="prefetch" href="/assets/js/14.08da88c9.js"><link rel="prefetch" href="/assets/js/15.91027415.js"><link rel="prefetch" href="/assets/js/16.c40e445a.js"><link rel="prefetch" href="/assets/js/17.09862d2e.js"><link rel="prefetch" href="/assets/js/18.b6542bdb.js"><link rel="prefetch" href="/assets/js/19.77e0ba09.js"><link rel="prefetch" href="/assets/js/20.bcca7d0d.js"><link rel="prefetch" href="/assets/js/21.22802ba4.js"><link rel="prefetch" href="/assets/js/23.709ee5af.js"><link rel="prefetch" href="/assets/js/3.8257086b.js"><link rel="prefetch" href="/assets/js/4.e398776e.js"><link rel="prefetch" href="/assets/js/5.6220f8dd.js"><link rel="prefetch" href="/assets/js/6.ece0e64d.js"><link rel="prefetch" href="/assets/js/7.3cce7458.js"><link rel="prefetch" href="/assets/js/8.6da1e87b.js"><link rel="prefetch" href="/assets/js/9.6bc8fee4.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.a760f68a.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div id="vuepress-theme-meteorlxy"><header class="header" data-v-7a046aea><div data-v-e4145d0a data-v-7a046aea><nav class="navbar" data-v-e4145d0a><div class="container" data-v-e4145d0a><a href="/" class="router-link-active" data-v-e4145d0a><span class="navbar-site-name" data-v-e4145d0a>
+          생계형 🐾者
+        </span></a> <div class="navbar-toggler" data-v-e4145d0a><svg class="icon" style="font-size:1.2em;" data-v-e4145d0a data-v-e4145d0a><title data-v-e4145d0a data-v-e4145d0a>menu</title><use xlink:href="#icon-menu" data-v-e4145d0a data-v-e4145d0a></use></svg></div> <div class="navbar-links" data-v-e4145d0a><a href="/" class="navbar-link" data-v-e4145d0a>
+            Home
+          </a><a href="/posts/" class="navbar-link router-link-active" data-v-e4145d0a>
+            Post
+          </a><a href="https://github.com/yoonhona" target="_blank" rel="noopener noreferrer" class="navbar-link" data-v-e4145d0a><span data-v-e4145d0a>Github</span> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" data-v-e4145d0a data-v-e4145d0a><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div></div></nav> <div class="navbar-holder" style="display:none;" data-v-e4145d0a></div></div> <div class="banner" data-v-98d6aa8c data-v-7a046aea data-v-7a046aea><div class="container" data-v-98d6aa8c><div class="center" data-v-98d6aa8c><h1 data-v-98d6aa8c data-v-7a046aea>
+          Go 언어의 순차적인 프로세스간의 통신(CSP)
+        </h1></div></div></div></header> <div class="container clearfix show-aside" data-v-4dd605a1 data-v-4dd605a1><main class="main" data-v-4dd605a1><div class="post" data-v-4dd605a1 data-v-4dd605a1><section class="post-meta main-div" data-v-4e23451f><section class="post-date clearfix" data-v-4e23451f><span class="create-date" data-v-4e23451f>
+      Created : 2020-07-02
+    </span> <span class="update-date" data-v-4e23451f>
+      Updated : 2020-07-16
+    </span></section> <section class="post-links" data-v-4e23451f><a href="/posts/2020/06/14/intellij-install.html" class="post-link" data-v-4e23451f>
+      Previous Post : 어떤 프론트엔드 개발자의 Intellij 사용법 - 설치(feat. Toolbox)
+    </a> <a href="/posts/2020/07/03/intellij-plugin.html" class="post-link" data-v-4e23451f>
+      Next Post : 어떤 프론트엔드 개발자의 Intellij 사용법 - 플러그인
+    </a></section></section> <article class="main-div"><div class="post-content content content__default"><div class="custom-block tip"><p class="custom-block-title">이 글은</p> <p><a href="http://acornpub.co.kr/book/concurrency-in-go" target="_blank" rel="noopener noreferrer">Concurrency in Go - Go 동시성 프로그램<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>
+스터디에 참여하면서 2장 <code>코드 모델링: 순차적인 프로세스 간의 통신</code>을 요약 정리한
+내용입니다.</p></div> <h2 id="동시성과-병렬성의-차이"><a href="#동시성과-병렬성의-차이" class="header-anchor">#</a> 동시성과 병렬성의 차이</h2> <p><strong>다른 것과 동시에 실행되는 것</strong>을 표현할 때 종종 동시성과 병렬성을 섞어서
+사용하는데,<br>
+코드에 대해 토론하는 경우라면 일반적으로 &quot;동시&quot;라는 단어를 사용해야
+한다.</p> <p>코드를 모델링할 때 동시성과 병렬성의 차이는 객체의 추상화에 큰 영향을 미치는
+것으로 밝혀졌으며, Go는 이를 최대한 활용한다.</p> <blockquote><p>동시성은 코드의 속성이고, 병렬 처리는 실행 중인 프로그램의 속성이다.</p></blockquote> <p>병렬로 실행하려는 의도로 작성한 코드가 <strong>실제로 그렇게 되리라는 보장이 있는가?</strong><br>
+코어가 하나뿐인 기기에서 해당 코드를 실행하면 어떻게 되는가? 실제로 병렬적으로
+실행되리라 생각할 수 있지만 그렇지 않다.<br>
+실제로는 구분할 수 없을 정도로 빠르게 순차적으로 실행된다.</p> <p>여기서 몇가지 중요한 사실은</p> <ol><li>우리는 병렬적인 코드를 작성하는 것이 아나라, <strong>병렬로 실행되기를 바라면서</strong>
+동시성 코드를 작성하는 것</li> <li>동시성 코드가 <strong>실제로 병렬로 실행되는지 여부를 모를 수</strong>도 있다.<br>
+프로그램의 런타임, 운영체제, 컨테어너, 가상머신과 같은 운영체제가 실행되는
+플랫폼,<br>
+그리고 최종적으로 CPU와 같은 추상화 계층들을 통해서만 코드가 병렬로 실행되는
+확인할 수 있다.</li> <li>병렬 처리인지 아닌지는 <strong>시간, 또는 컨텍스트</strong>에 의해 결정된다.<br>
+여기서 컨텐스트는 1장의 원자성이 아닌 두 개 이상의 연산이 병렬적으로 실행됐다고
+여길 수 있는 범위로 정의</li></ol> <p>이 범위는<br>
+시분할 관점<br>
+프로그램이 실행되는 프로세스<br>
+해당 프로세스의 운영체제 스레드<br>
+프로세스가 동작하는 장비 등으로 정의할 수 있고,<br>
+컨텍스트의 정의는 동시성과 정확성의 개념과 밀접하게 관련된다.<br>
+이게 <strong>컨텍스트 정의가 중요한 이유</strong>다.<br>
+동시에 수행되는 작업은 정의된 컨텍스트에서만 정확하다. 이것은 <strong>모두
+상대적</strong>이다.</p> <ul><li>장비<br>
+두 대의 장비에서 각각 실행되는 계산기는 다른장비에서 실행되는 프로세스의 로직에
+영향을 미치지 않을것이라 기대할 수 있다.</li> <li>프로세스<br>
+한 장비의 두 개의 프로세스는 서로 영향을 주지 않을 것이라고 예상되지만,<br>
+정말 서로의 논리에 영향을 주지 않을까?<br>
+프로세스 A가 사용하는 파일을 B가 덮어쓸 수도 있고, 메모리를 침범할 수도 있다.<br>
+다행히도 프로세스 경계와 운영체제는 논리적인 방식으로 동시성 문제들을 생각하는
+데 도움이 된다.</li> <li>OS 스레드<br>
+1장에서 이야기한 레이스 컨디션, 데드락, 라이브락, 기아상태와 같은 모든 문재가
+발생</li></ul> <p>추상화의 단계가 진행될수록 무언가를 동시적으로 모델링하는 문제는 <strong>더욱 추론하기
+어려워지고 중요</strong>해짐<br>
+거꾸로 동시적으로 모델링이 어려워질수록 추상화는 더욱 더 중요해진다.<br>
+하지만 우리업계 대부분의 동시성 논리는 가장 높은 추상화 수준인 OS 스레드에서
+작성되어있고, 시스템이 많은 스레드를 처리할 수 없는 경우에는 스레드 풀<sup>thread</sup> <sup>pool</sup>을 만들고 스레드 풀에 작업을 다중화해야 했다.<br> <a href="https://www.educative.io/courses/java-multithreading-for-senior-engineering-interviews/m2G48X18NDO" target="_blank" rel="noopener noreferrer">thread 이미지<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <p>Go는 CSP에서 몇가지 개념을 채용하여 채널<sup>channel</sup>을 사용하는 새로운 기본요소를
+도입하였고<br>
+스레드는 여전히 존재하지만 <strong>고루틴과 채널에서</strong> 모든 것을 모델링하며 <strong>메모리를
+공유</strong>한다.</p> <h2 id="csp란-무엇인가"><a href="#csp란-무엇인가" class="header-anchor">#</a> CSP란 무엇인가?</h2> <p>CSP는 상호작용하는 순차적 프로세스들<sup>Communicating</sup> <sup>Sequential</sup> <sup>Processes</sup>의 약자로<br>
+1978년 찰스 안토니 리차드 호어<sup>Chanrles</sup> <sup>Antony</sup> <sup>Richard</sup> <sup>Hoare</sup>가 미국
+계산기 학회에서 논문을 발표했다.<br>
+이 논문에서 호어는 &quot;프로그래밍에서 두 가지 기본 요소인 입력 및 출력이 간과되고
+있으며, 특히 동시에 실행되는 코드의 경우에는 더욱 그렇다&quot;<br>
+당시에는 goto 문법의 사용, 객체 지향 패러다임이 싹트기 시작했고 동시성 연산에
+대해서는 크게 고려하지 않았다.<br>
+호어가 이를 바로잡기 시작하면서 그의 논문과 CSP가 탄생하였다.</p> <p>호어는 CSP 프로그래밍 언어에 프로세스 간 입력 및 출력, 즉 <strong>통신을 정확하게
+모델링하기 위한 기본 요소들을 포함</strong>시켰다.<br>
+입력을 요구하고 다른 프로세스가 사용할 출력을 생산하는 로직의 캡슐화된 부분을
+<strong>프로세스</strong>라고 지칭했다.</p> <blockquote><p>!: 프로세스에 입력을 보냄<br>
+?: 프로세스에 출력을 읽어 옴</p></blockquote> <table><thead><tr><th style="text-align:left;">연산</th> <th style="text-align:left;">설명</th></tr></thead> <tbody><tr><td style="text-align:left;">cardreader?cardimage</td> <td style="text-align:left;">cardreader로부터 card를 읽어와서 <br>그 값(문자열) cardimage 변수에 할당</td></tr> <tr><td style="text-align:left;">linerprinter!lineimage</td> <td style="text-align:left;">linerprinter에 출력을 위한 lineimage 값을 전송</td></tr></tbody></table> <p>이러한 기본 요소를 사용해, 통신을 모델링하기 위한 일급<sup>first-class</sup>지원이 문제를
+더 간단하고 이해하기 쉽게 해주고 있다.</p> <p>인기있는 언어 대다수는 메모리에 대한 접근을 공유하고 동기화하는 방식을 선호한다.<br>
+메모리 접근 동기화가 본질적으로 나쁜 것은 아니다. 그러나 공유 메모리 모델은 특히
+대규모 프로그램이나 복잡한 프로그램에서 올바르게 활용하기 어려울 수 있다.</p> <p>동시성이 Go의 강점 중 하나로 간주되는 이유가 바로 이것이다.<br>
+처음부터 CSP의 원칙을 염두에 두고 구축됐으므로 읽고 쓰기 쉽고, 추록하기 쉽다.</p> <p><a href="http://arild.github.io/csp-presentation/#11" target="_blank" rel="noopener noreferrer">프로세스간 채널을 사용한 통신 이미지<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <div class="custom-block tip"><p class="custom-block-title">first class citizen</p> <p>함수에 전달되고, 함수로부터 반환되고, 변수에 할당될 수 있는 값</p></div> <h2 id="동시성을-지원하는-언어의-장점"><a href="#동시성을-지원하는-언어의-장점" class="header-anchor">#</a> 동시성을 지원하는 언어의 장점</h2> <p>많은 언어는 보통 OS 스레드 및 메모리 접근 동기화 수준에서 언어의 추상화를
+끝내지만,<br>
+Go는 다른 방식을 사용해 고루틴 및 채널의 개념으로 이를 대체하는데 고루틴은
+스레드와, 채널은 뮤텍스와 비교할 수 있을 것이다.</p> <p>병렬성을 고민할 필요 없이 동시성을 지원한다는 차이가 어떤 영향을 미치는지
+살펴보자.</p> <p>웹 서버를 개발한다고 할 시 스레드 추상화를 위한 질문은 이럴 것이다.</p> <ol><li>언어가 자체적으로 스레드를 지원하는가? 아니면 라이브러리를 선택?</li> <li>스레드의 제한 영역은 어디에 있어야 하는가?</li> <li>이 운영체제의 스레드는 얼마나 무거운가?<br>
+...</li></ol> <p><a href="https://github.com/code-review-checklists/java-concurrency" target="_blank" rel="noopener noreferrer">스레드를 지원하는 자바에서 동시성 코드에 대한 체크리스트<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <p>실질적인 문제 해결보다는 병령성 문제를 해결하기 위해 생각해야 할 것이 많다.<br>
+해당 언어에서 병렬성과 관련하여 추상화할 수 있는 프레임워크가 존재한다고 해서,<br>
+코드의 복잡성이 숨겨져 있을 뿐 없어진 것이 아니다.<br> <strong>복잡성은 버그</strong>를 낳는다.</p> <p>Go에서라면 들어오는 연결마다 고루틴을 만들고, .....<br>
+이처럼 문제에 대해 자연스럽게 생각하고 코딩하는 방식으로 연결된다.<br>
+몇 가지 이점도 생기는데 Go의 런타임은 고루틴을 OS 스레드에 자동으로 다중화하고
+스케줄링을 관리해준다.<br>
+이것은 모델링한 방법을 변경하지 않고도 런타임 최적화할 수 있다는 것을 의미한다.<br>
+이는 고전적인 관심사의 분리<sup>seperation</sup> <sup>of</sup> <sup>concerns</sup>이다.(6장에서 계속)</p> <p>또 다른 이점은 동시성 방식으로 모델링된 공간의 양이 늘어난다는 것.<br>
+위의 웹 서버예제로 다시 들어가보면 프로그램은 자신의 호스트에서 허용하는 병렬성의
+양만큼 <strong>동적으로</strong> 확장될 수 있다.</p> <p>이렇듯 CSP에서 영감을 얻은 기본요소들과 이를 지원하는 런타임의 화려한 조합이 Go에
+강력한 힘을 선사한다.</p> <h2 id="go의-동시성에-대한-철학"><a href="#go의-동시성에-대한-철학" class="header-anchor">#</a> Go의 동시성에 대한 철학</h2> <p>Go에서 CSP 스타일로만 동시성 코드를 작성할 수 있는 것은 아니다.<br>
+메모리 접근 동기화를 비롯한 여러가지 전통적인 방법을 지원한다.</p> <p><strong>메모리 공유를 사용해 통신하지 마라. 대신 통신을 통해 메모리를 공유하라</strong><br>
+하지만 Go 팀에서는 CSP 스타일의 사용을 권하고 있다.</p> <p>그러면 어느 방법을 사용해야 할까?</p> <img src="https://www.plantuml.com/plantuml/svg/VPBDQi9058NtUOgBEnSkZAaB5ssVeFj2Dq4736qIIUB2dJzJ5sAX2uD1J9j2BHHIY4qgMVX4cPjtQCQ_M97kXZFtVFVCOQvDIpQijleWD9K60QAsh0uqY5atb9Qbw9fWtYjQIpPa5LHTq-jDGrS9M4QR249cjGWKaZXWOGmuc-1m3DZtSVPP0Da4qoAj2u3zd5G4f4isMk2WXwu3-4AJa08wFPn-eHidGVVgu2ldld8Hs5E0RfJIOECRZd7k9QinkXJkDCXkqAEfxJ3lFGazuAVHv0zDp6bY4P8V7zy2_8uuZVKZjkf2bYaTpDbYpOaiZ58d_fTOoOcLx5rJdxtwa87OYcweZslsuUzmV9bdftQ4zleSIzgJS4aPVJwjiCgRvesKIfVRJcjmIynD01xah2mTopVwAKBaucvKFAYL8pNdIZaW7wtMe7DcsLOMX6kYDR9FzGi0" alt="uml diagram"> <ol><li>데이터의 소유권을 이전하려고 하는가?<br>
+채널은 한번에 하나의 동시 컨텐스트만 데이터 소유권을 가져야 한다는 의도를
+채널의 타입에 인코딩함으로써 메모리 소유권 개념을 전달할 수 있게 도와준다.<br>
+이 방식의 가장 큰 장점은 적은 비용으로 메모니 내부 큐<sup>in-memory</sup> <sup>queue</sup>를
+위한 버퍼링된 채널을 생성하고, 이를 통해 생산자와 소비자를 분리할 수 있고,
+동시성 코드를 다른 동시성 코드와 함께 구성할 수 있다.</li> <li>구조체의 내부 상태를 보호하고자 하는가?<br>
+메모리 접근 동기화 기본 요소를 사용할 수 있는 훌륭한 후보이자 채널을
+사용해서는 안된다는 강력한 지표<br>
+메모리 접근 동기화를 통해 호출자에게 임계영역을 잠그는 세부사항을 노출하지 않을
+수 있다.</li> <li>여러 부분의 논리를 조정해야 하는가?<br>
+채널은 본질적으로 메모리 접근 동기화 기본 요소보다 더 쉽게 구성 가능하고
+복잡성을 쉽게 제어할 수 있다.</li> <li>성능상의 임계 영역(performance-critical section)인가?<br>
+특정 영역이 다른 부분보다 느린 병목지점으로 밝혀지면 메모리 접근 동기화
+기본요소를 사용하자.<br>
+채널이 동작할 때 메모리 접근 동기화를 사용하기 때문에 채널이 더 늘릴 수 있기
+때문이다.</li></ol> <div class="custom-block tip"><p class="custom-block-title">동시성에 대한 Go의 철학을 요약하면</p> <p>단순화를 목표로 하고,<br>
+가능하면 채널을 사용하며,<br>
+고루틴을 무한정 쓸 수 있는 자원처럼 다루어라</p></div></div></article> <section class="post-meta main-div" data-v-4e23451f><section class="post-date clearfix" data-v-4e23451f><span class="create-date" data-v-4e23451f>
+      Created : 2020-07-02
+    </span> <span class="update-date" data-v-4e23451f>
+      Updated : 2020-07-16
+    </span></section> <section class="post-links" data-v-4e23451f><a href="/posts/2020/06/14/intellij-install.html" class="post-link" data-v-4e23451f>
+      Previous Post : 어떤 프론트엔드 개발자의 Intellij 사용법 - 설치(feat. Toolbox)
+    </a> <a href="/posts/2020/07/03/intellij-plugin.html" class="post-link" data-v-4e23451f>
+      Next Post : 어떤 프론트엔드 개발자의 Intellij 사용법 - 플러그인
+    </a></section></section> <div id="post-comments" class="main-div"><!----></div></div></main> <aside class="aside" data-v-4dd605a1><div class="info-card main-div" data-v-9d847660 data-v-4dd605a1><div class="info-card-header" data-v-9d847660><img src="https://avatars1.githubusercontent.com/u/10597948?s=460&amp;v=4" alt="생계형 🐾者" class="info-avatar" data-v-9d847660></div> <div class="info-card-body" data-v-9d847660><section class="info-nickname" data-v-9d847660>
+      생계형 🐾者
+    </section> <section class="info-desc" data-v-9d847660>생계형 개발자의 블로그입니다.<br />프론트 엔드 개발을 하며<br /> React.js를 다룹니다.</section> <section class="info-contact" data-v-9d847660><section data-v-9d847660><span title="Seoul, Korea" data-v-9d847660 data-v-9d847660><svg class="icon" style="font-size:1em;" data-v-9d847660 data-v-9d847660><title data-v-9d847660 data-v-9d847660>Seoul, Korea</title><use xlink:href="#icon-location" data-v-9d847660 data-v-9d847660></use></svg><span class="info-text" data-v-9d847660 data-v-9d847660>
+          Seoul, Korea
+        </span></span></section> <!----> <section data-v-9d847660><a href="mailto:lucky7_nyh@naver.com" title="lucky7_nyh@naver.com" data-v-9d847660 data-v-9d847660><svg class="icon" style="font-size:1em;" data-v-9d847660 data-v-9d847660><title data-v-9d847660 data-v-9d847660>lucky7_nyh@naver.com</title><use xlink:href="#icon-email" data-v-9d847660 data-v-9d847660></use></svg><span class="info-text" data-v-9d847660 data-v-9d847660>
+          lucky7_nyh@naver.com
+        </span></a></section></section></div> <div class="info-card-footer" data-v-9d847660><section class="info-sns clearfix" data-v-9d847660><a href="https://github.com/yoonhona" target="_blank" class="sns-link" data-v-9d847660><span title="GitHub: yoonhona" class="sns-icon" data-v-9d847660 data-v-9d847660><svg class="icon" style="font-size:1.5em;" data-v-9d847660 data-v-9d847660><title data-v-9d847660 data-v-9d847660>GitHub: yoonhona</title><use xlink:href="#icon-github" data-v-9d847660 data-v-9d847660></use></svg></span></a><a href="https://www.facebook.com/profile.php?id=100001763897524" target="_blank" class="sns-link" data-v-9d847660><span title="Facebook: Na Yoonho" class="sns-icon" data-v-9d847660 data-v-9d847660><svg class="icon" style="font-size:1.5em;" data-v-9d847660 data-v-9d847660><title data-v-9d847660 data-v-9d847660>Facebook: Na Yoonho</title><use xlink:href="#icon-facebook" data-v-9d847660 data-v-9d847660></use></svg></span></a><a href="https://yoonhona.github.io/rss" target="_blank" class="sns-link" data-v-9d847660><span title="RSS: " class="sns-icon" data-v-9d847660 data-v-9d847660><svg class="icon" style="font-size:1.5em;" data-v-9d847660 data-v-9d847660><title data-v-9d847660 data-v-9d847660>RSS: </title><use xlink:href="#icon-rss" data-v-9d847660 data-v-9d847660></use></svg></span></a></section></div></div> <div class="post-nav-card main-div" style="position:relative;top:0;width:0px;" data-v-4dd605a1><div class="post-nav-contents"><svg class="icon"><title>book</title><use xlink:href="#icon-book"></use></svg> <span>목차</span> <div class="post-nav-toc"><ul><li><a href="/posts/2020/07/02/go-csp.html#동시성과-병렬성의-차이">동시성과 병렬성의 차이</a></li><li><a href="/posts/2020/07/02/go-csp.html#csp란-무엇인가">CSP란 무엇인가?</a></li><li><a href="/posts/2020/07/02/go-csp.html#동시성을-지원하는-언어의-장점">동시성을 지원하는 언어의 장점</a></li><li><a href="/posts/2020/07/02/go-csp.html#go의-동시성에-대한-철학">Go의 동시성에 대한 철학</a></li></ul></div></div> <div class="post-nav-comments"><svg class="icon"><title>comment</title><use xlink:href="#icon-comment"></use></svg> <a href="/posts/2020/07/02/go-csp.html#post-comments">
+      Comments
+    </a></div></div></aside></div> <footer class="footer" data-v-1375e54c><p class="footer-sns-links" data-v-1375e54c><a href="https://github.com/yoonhona" target="_blank" class="sns-link" data-v-1375e54c><span title="GitHub: yoonhona" class="sns-icon" data-v-1375e54c data-v-1375e54c><svg class="icon" style="font-size:25px;" data-v-1375e54c data-v-1375e54c><title data-v-1375e54c data-v-1375e54c>GitHub: yoonhona</title><use xlink:href="#icon-github" data-v-1375e54c data-v-1375e54c></use></svg></span></a><a href="https://www.facebook.com/profile.php?id=100001763897524" target="_blank" class="sns-link" data-v-1375e54c><span title="Facebook: Na Yoonho" class="sns-icon" data-v-1375e54c data-v-1375e54c><svg class="icon" style="font-size:25px;" data-v-1375e54c data-v-1375e54c><title data-v-1375e54c data-v-1375e54c>Facebook: Na Yoonho</title><use xlink:href="#icon-facebook" data-v-1375e54c data-v-1375e54c></use></svg></span></a><a href="https://yoonhona.github.io/rss" target="_blank" class="sns-link" data-v-1375e54c><span title="RSS: " class="sns-icon" data-v-1375e54c data-v-1375e54c><svg class="icon" style="font-size:25px;" data-v-1375e54c data-v-1375e54c><title data-v-1375e54c data-v-1375e54c>RSS: </title><use xlink:href="#icon-rss" data-v-1375e54c data-v-1375e54c></use></svg></span></a></p> <p class="footer-text" data-v-1375e54c><span data-v-1375e54c>Powered by </span> <a href="https://github.com/vuejs/vuepress" target="_blank" data-v-1375e54c>
+      VuePress
+    </a> <span data-v-1375e54c> | </span> <a href="https://github.com/meteorlxy/vuepress-theme-meteorlxy" target="_blank" data-v-1375e54c>
+        meteorlxy
+      </a></p> <!----></footer></div><div class="global-ui"><!----><!----></div></div>
+    <script src="/assets/js/app.4cbb8bd7.js" defer></script><script src="/assets/js/11.8a2af103.js" defer></script><script src="/assets/js/22.e91c711d.js" defer></script>
+  </body>
+</html>
